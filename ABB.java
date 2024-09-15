@@ -1,4 +1,4 @@
-// Clase de Arbol Binario de Búsquada ABB
+// Clase de Arbol Binario de Búsqueda ABB
 class ABB {
 
     // Nombre: Linda Candela Paz
@@ -62,5 +62,69 @@ class ABB {
         return raiz;
     }
 
-    // Otros métodos de ABB (borrar, inorder, etc.) van aquí...
+    // Método para hacer un recorrido in-order
+    void inorder() {
+        inorder_Recursive(raiz);
+    }
+
+    // Recorrido in-order recursivo
+    void inorder_Recursive(Nodo raiz) {
+        if (raiz != null) {
+            inorder_Recursive(raiz.izquierda);
+            System.out.print(raiz.clave + " ");
+            inorder_Recursive(raiz.derecha);
+        }
+    }
+
+    // Método main para ejecutar el código
+    public static void main(String[] args) {
+        // Crear el objeto ABB
+        ABB arbol = new ABB();
+
+        // Agregar datos al ABB
+        arbol.insertar(45);
+        arbol.insertar(10);
+        arbol.insertar(7);
+        arbol.insertar(12);
+        arbol.insertar(90);
+        arbol.insertar(50);
+
+        // Mostrar el árbol ABB
+        System.out.println("El árbol ABB ha sido creado (izquierda-raiz-derecha):");
+        arbol.inorder();
+
+        // Borrar nodo hoja
+        System.out.println("\nEl árbol ABB después de borrar 12 (Nodo hoja):");
+        arbol.borrarClave(12);
+        arbol.inorder();
+    }
+
+    // Método para borrar un nodo
+    void borrarClave(int clave) {
+        raiz = borrar_Recursivo(raiz, clave);
+    }
+
+    // Borrado recursivo
+    Nodo borrar_Recursivo(Nodo raiz, int clave) {
+        if (raiz == null) {
+            return raiz;
+        }
+
+        if (clave < raiz.clave) {
+            raiz.izquierda = borrar_Recursivo(raiz.izquierda, clave);
+        } else if (clave > raiz.clave) {
+            raiz.derecha = borrar_Recursivo(raiz.derecha, clave);
+        } else {
+            if (raiz.izquierda == null) {
+                return raiz.derecha;
+            } else if (raiz.derecha == null) {
+                return raiz.izquierda;
+            }
+
+            raiz.clave = ValorMinimo(raiz.derecha);
+            raiz.derecha = borrar_Recursivo(raiz.derecha, raiz.clave);
+        }
+
+        return raiz;
+    }
 }
