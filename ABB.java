@@ -1,11 +1,8 @@
-// Clase de Arbol Binario de Búsqueda ABB
-class ABB {
-
     // Nombre: Linda Candela Paz
     // Legajo: VINF013378
     // DNI: 42379854
 
-    // Clase Nodo de un ABB
+class ABB {
     class Nodo {
         int clave;
         Nodo izquierda, derecha;
@@ -16,10 +13,9 @@ class ABB {
         }
     }
 
-    // Nodo raiz, dato referencial
     Nodo raiz;
 
-    // Constructor de ABB => se inicializa como arbol vacío
+    // Se inicia el árbol vacío
     ABB() {
         raiz = null;
     }
@@ -58,11 +54,11 @@ class ABB {
             raiz.derecha = insertar_Recursivo(raiz.derecha, clave);
         }
 
-        // Devolver el nodo (sin cambios si es un nodo hoja)
+        // Devuelve el nodo
         return raiz;
     }
 
-    // Método para hacer un recorrido in-order
+    // Recorrido in-order
     void inorder() {
         inorder_Recursive(raiz);
     }
@@ -76,30 +72,7 @@ class ABB {
         }
     }
 
-    // Método main para ejecutar el código
-    public static void main(String[] args) {
-        // Crear el objeto ABB
-        ABB arbol = new ABB();
-
-        // Agregar datos al ABB
-        arbol.insertar(45);
-        arbol.insertar(10);
-        arbol.insertar(7);
-        arbol.insertar(12);
-        arbol.insertar(90);
-        arbol.insertar(50);
-
-        // Mostrar el árbol ABB
-        System.out.println("El árbol ABB ha sido creado (izquierda-raiz-derecha):");
-        arbol.inorder();
-
-        // Borrar nodo hoja
-        System.out.println("\nEl árbol ABB después de borrar 12 (Nodo hoja):");
-        arbol.borrarClave(12);
-        arbol.inorder();
-    }
-
-    // Método para borrar un nodo
+    // Borrar un nodo (este es el método)
     void borrarClave(int clave) {
         raiz = borrar_Recursivo(raiz, clave);
     }
@@ -126,5 +99,62 @@ class ABB {
         }
 
         return raiz;
+    }
+
+    // Método para buscar una clave
+    boolean buscar(int clave) {
+        Nodo resultado = buscar_Recursivo(raiz, clave);
+        return resultado != null;
+    }
+
+    // Búsqueda recursiva
+    Nodo buscar_Recursivo(Nodo raiz, int clave) {
+        if (raiz == null || raiz.clave == clave) {
+            return raiz;
+        }
+
+        if (raiz.clave > clave) {
+            return buscar_Recursivo(raiz.izquierda, clave);
+        }
+
+        return buscar_Recursivo(raiz.derecha, clave);
+    }
+
+    // Método main para ejecutar el código
+    public static void main(String[] args) {
+        ABB arbol = new ABB();
+
+        arbol.insertar(45);
+        arbol.insertar(10);
+        arbol.insertar(7);
+        arbol.insertar(12);
+        arbol.insertar(90);
+        arbol.insertar(50);
+
+        // Mostrar el árbol ABB
+        System.out.println("El árbol ABB ha sido creado (izquierda-raiz-derecha):");
+        arbol.inorder();
+
+        // Borrar nodo hoja
+        System.out.println("\nEl árbol ABB después de borrar 12 (Nodo hoja):");
+        arbol.borrarClave(12);
+        arbol.inorder();
+
+        // Borrar el nodo con un solo hijo
+        System.out.println("\nEl árbol ABB después de borrar 90 (Nodo con 1 hijo):");
+        arbol.borrarClave(90);
+        arbol.inorder();
+
+        // Borrar nodo con 2 hijos
+        System.out.println("\nEl árbol ABB después de borrar 45 (Nodo con 2 hijos):");
+        arbol.borrarClave(45);
+        arbol.inorder();
+
+        // Buscar clave en el ABB
+        boolean ret_val = arbol.buscar(50);
+        System.out.println("\nClave 50 en el ABB: " + ret_val);
+
+        ret_val = arbol.buscar(12);
+        System.out.println("Clave 12 en el ABB: " + ret_val);
     }
 }
