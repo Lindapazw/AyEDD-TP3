@@ -25,9 +25,8 @@ Cuando se elimina el nodo `45`, que tiene dos hijos, el árbol reemplaza a `45` 
 ## Consigna cumplida:
 
 ### `int ValorMinimo(Nodo raiz)`:
-Este método recorre el subárbol izquierdo para encontrar el nodo con el valor más pequeño. Esto es esencial para la eliminación de nodos con dos hijos, ya que permite encontrar el sucesor in-order correctamente.
+Este método recorre el subárbol izquierdo para encontrar el nodo con el valor más pequeño. Esto permite encontrar el sucesor in-order correctamente.
 
 ### `Nodo insertar_Recursivo(Nodo raiz, int clave)`:
 Este método inserta recursivamente un nodo en el árbol de búsqueda binario, respetando las reglas de comparación: si la clave es menor, el nodo se inserta a la izquierda; si es mayor, se inserta a la derecha.
 
-Ambos métodos han sido implementados correctamente y producen los resultados esperados tanto en la inserción como en la eliminación de nodos.
